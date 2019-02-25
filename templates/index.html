@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Moderation</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+<header class="navbar navbar-default">
+  <span class="navbar-text"> Image moderation - Counting Faces
+      <a href="#/"></a>
+  </span>
+</header>
+
+<form action="/" method="post" enctype="multipart/form-data" >
+    <label class="btn btn-default btn-file">
+        Upload Image <input type="file" id="imgInp" name="image" style="display: none;">
+    </label>
+    <p>&nbsp;</p>
+      <img id="blah" src="#" alt="your image"/>
+      <p>&nbsp;</p>
+    <input type="submit" value="Check you Image" class="btn btn-primary">
+</form>
+
+<div class="text-center">
+    {% if init %}
+        {% if containNoFaces %}
+            <div class="alert alert-danger" style="margin-top:18px;">
+                <strong>Error</strong> Your Uploaded image do not contain Human Faces
+            </div>
+        {% else %}
+            <div class="alert alert-success" style="margin-top:18px;">
+                <strong>Yes!</strong> Get your coloured Image Enjoy!
+            </div>
+             <img src="{{ image_to_show }}">
+        {% endif %}
+    {% endif %}
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+      
+          reader.onload = function(e) {
+            $('#blah').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+      $("#imgInp").change(function() {
+        readURL(this);
+      });
+       </script> 
+</body>
+</html>
