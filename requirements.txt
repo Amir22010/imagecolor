@@ -3,4 +3,3 @@ numpy
 flask
 pillow
 gunicorn
-caffe
