@@ -11,6 +11,7 @@ from PIL import Image
 from flask import send_file
 import numpy as np
 import cv2
+import caffe
 import base64
 
 app = Flask(__name__)
@@ -18,7 +19,7 @@ app = Flask(__name__)
 # load our serialized black and white colorizer model and cluster
 # center points from disk
 print("[INFO] loading model...")
-net = cv2.dnn.readNetFromCaffe('model/colorization_deploy_v2.prototxt', 'model/colorization_release_v2.caffemodel')
+net = caffe.Net('model/colorization_deploy_v2.prototxt', 'model/colorization_release_v2.caffemodel', caffe.TEST)
 pts = np.load('model/pts_in_hull.npy')
 
 # add the cluster centers as 1x1 convolutions to the model
